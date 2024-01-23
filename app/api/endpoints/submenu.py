@@ -2,9 +2,9 @@ from http import HTTPStatus
 
 from fastapi import APIRouter, Depends
 
-from app.cache.services.submenu_service import SubMenuCache, submenu_service
+from app.cache.services.submenu_service import SubmenuCache, submenu_service
 from app.schemas.status import StatusMessage
-from app.schemas.submenu import SubMenuCreate, SubMenuOut, SubMenuUpdate
+from app.schemas.submenu import SubmenuCreate, SubmenuOut, SubmenuUpdate
 
 router = APIRouter(
     prefix="/menus/{menu_id}/submenus",
@@ -14,13 +14,13 @@ router = APIRouter(
 
 @router.get(
     "/",
-    response_model=list[SubMenuOut],
+    response_model=list[SubmenuOut],
     status_code=HTTPStatus.OK,
     summary="Просмотр списка подменю",
 )
 async def get_all_submenus(
-    menu_id: str, service: SubMenuCache = Depends(submenu_service)
-) -> list[SubMenuOut]:
+    menu_id: str, service: SubmenuCache = Depends(submenu_service)
+) -> list[SubmenuOut]:
     """
     Получение списка всех подменю для конкретного меню
     """
@@ -29,27 +29,27 @@ async def get_all_submenus(
 
 @router.get(
     "/{submenu_id}",
-    response_model=SubMenuOut,
+    response_model=SubmenuOut,
     status_code=HTTPStatus.OK,
     summary="Просмотр конкретного подменю по id",
 )
 async def get_one_submenu(
-    submenu_id: str, service: SubMenuCache = Depends(submenu_service)
-) -> SubMenuOut:
+    submenu_id: str, service: SubmenuCache = Depends(submenu_service)
+) -> SubmenuOut:
     return await service.get_submenu(submenu_id)
 
 
 @router.post(
     "/",
     status_code=HTTPStatus.CREATED,
-    response_model=SubMenuOut,
+    response_model=SubmenuOut,
     summary="Создание подменю",
 )
 async def create_new_submenu(
     menu_id: str,
-    submenu: SubMenuCreate,
-    service: SubMenuCache = Depends(submenu_service),
-) -> SubMenuOut:
+    submenu: SubmenuCreate,
+    service: SubmenuCache = Depends(submenu_service),
+) -> SubmenuOut:
     """
     Создание подменю:
 
@@ -61,15 +61,15 @@ async def create_new_submenu(
 
 @router.patch(
     "/{submenu_id}",
-    response_model=SubMenuOut,
+    response_model=SubmenuOut,
     status_code=HTTPStatus.OK,
     summary="Обновление подменю",
 )
 async def to_update_submenu(
     submenu_id: str,
-    obj_in: SubMenuUpdate,
-    service: SubMenuCache = Depends(submenu_service),
-) -> SubMenuOut:
+    obj_in: SubmenuUpdate,
+    service: SubmenuCache = Depends(submenu_service),
+) -> SubmenuOut:
     """
     Обновление подменю:
 
@@ -86,6 +86,6 @@ async def to_update_submenu(
     summary="Удаление подменю по id",
 )
 async def to_delete_submenu(
-    submenu_id: str, service: SubMenuCache = Depends(submenu_service)
+    submenu_id: str, service: SubmenuCache = Depends(submenu_service)
 ) -> StatusMessage:
     return await service.delete_submenu(submenu_id)

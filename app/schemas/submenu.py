@@ -1,12 +1,12 @@
 from pydantic import BaseModel
 
 
-class SubMenuBase(BaseModel):
+class SubmenuBase(BaseModel):
     title: str
     description: str
 
 
-class SubMenuCreate(SubMenuBase):
+class SubmenuCreate(SubmenuBase):
     # menu_id: str | None
 
     class Config:
@@ -18,7 +18,7 @@ class SubMenuCreate(SubMenuBase):
         }
 
 
-class SubMenuUpdate(SubMenuBase):
+class SubmenuUpdate(SubmenuBase):
     class Config:
         json_schema_extra = {
             "example": {
@@ -28,7 +28,7 @@ class SubMenuUpdate(SubMenuBase):
         }
 
 
-class SubMenuOut(SubMenuBase):
+class SubmenuOut(SubmenuBase):
     id: str
     dishes_count: int
 

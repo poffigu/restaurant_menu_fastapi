@@ -4,7 +4,7 @@ from fastapi import HTTPException
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.models import Dish, Menu, SubMenu
+from src.menu.models import Dish, Menu, Submenu
 
 
 class Validation:
@@ -51,5 +51,5 @@ class Validation:
 
 
 menu_validator = Validation(Menu)
-submenu_validator = Validation(SubMenu)
+submenu_validator = Validation(Submenu)
 dish_validator = Validation(Dish)

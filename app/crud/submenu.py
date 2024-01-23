@@ -1,10 +1,10 @@
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from app.crud.base import CRUDBase
-from app.models import SubMenu
+from src.menu.models import Submenu
 
 
-class SubMenuCrud(CRUDBase):
+class SubmenuCrud(CRUDBase):
     async def create_submenu_from_dict(
         self,
         parent_id: str,
@@ -22,4 +22,4 @@ class SubMenuCrud(CRUDBase):
         return submenu
 
 
-submenu_crud = SubMenuCrud(SubMenu)
+submenu_crud = SubmenuCrud(Submenu)

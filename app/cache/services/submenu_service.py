@@ -7,7 +7,7 @@ from app.crud.submenu import submenu_crud
 from app.schemas.status import StatusMessage
 
 
-class SubMenuCache:
+class SubmenuCache:
     def __init__(self, session):
         self.session = session
 
@@ -44,4 +44,4 @@ class SubMenuCache:
 
 
 async def submenu_service(session: AsyncSession = Depends(get_async_session)):
-    return SubMenuCache(session=session)
+    return SubmenuCache(session=session)

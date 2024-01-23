@@ -1,5 +1,5 @@
 import uuid
-from sqlalchemy import Column, String, Text, and_, func, select, ForeignKey
+from sqlalchemy import and_, Column, ForeignKey, func, select, String
 from sqlalchemy.orm import declarative_base, declared_attr, column_property, Mapped, relationship
 
 
@@ -12,11 +12,6 @@ class PreBase:
         return cls.__name__.lower()
 
 Models = declarative_base(cls=PreBase)
-
-# class BaseModel(Models):
-#     __abstract__ = True
-#     title = Column(String(100), unique=True, nullable=False)
-#     description = Column(Text)
 
 class Dish(Models):
     id = Column(String, primary_key=True, default=generate_uuid)
